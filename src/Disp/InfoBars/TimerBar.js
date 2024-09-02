@@ -10,6 +10,12 @@ import {
   LastNumberOfTimers,
 } from '../VariablesAndData';
 import { CreateTimer } from './CreateDOMElements';
+import {
+  updateChanceTotal,
+  getChanceFinalDeer,
+  getChanceFinal,
+  updateChanceTotalDeer,
+} from '../../Main/CheckStates/Probability';
 
 /**
  * This function creates the TimerBar and appends it to l('wrapper')
@@ -124,9 +130,10 @@ export function UpdateTimerBar() {
           (Game.shimmerTypes.golden.time - Game.shimmerTypes.golden.minTime) /
             (Game.shimmerTypes.golden.maxTime - Game.shimmerTypes.golden.minTime),
         ) ** 5;
+      updateChanceTotal(chanceToSpawn);
       l('CMTimerBarGCTime').textContent = `${Math.ceil(
         (Game.shimmerTypes.golden.maxTime - Game.shimmerTypes.golden.time) / Game.fps,
-      )} ${chanceToSpawn < 0.01 ? '<' : ''}${chanceToSpawn.toLocaleString('en', {
+      )} ${getChanceFinal() < 0.01 ? '<' : ''}${getChanceFinal().toLocaleString('en', {
         style: 'percent',
       })}`;
       numberOfTimers += 1;
@@ -167,9 +174,10 @@ export function UpdateTimerBar() {
           (Game.shimmerTypes.reindeer.time - Game.shimmerTypes.reindeer.minTime) /
             (Game.shimmerTypes.reindeer.maxTime - Game.shimmerTypes.reindeer.minTime),
         ) ** 5;
+      updateChanceTotalDeer(chanceToSpawn);
       l('CMTimerBarRenTime').textContent = `${Math.ceil(
         (Game.shimmerTypes.reindeer.maxTime - Game.shimmerTypes.reindeer.time) / Game.fps,
-      )} ${chanceToSpawn < 0.01 ? '<' : ''}${chanceToSpawn.toLocaleString('en', {
+      )} ${getChanceFinalDeer() < 0.01 ? '<' : ''}${getChanceFinalDeer().toLocaleString('en', {
         style: 'percent',
       })}`;
       numberOfTimers += 1;

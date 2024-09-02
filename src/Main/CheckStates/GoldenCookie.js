@@ -8,6 +8,7 @@ import {
   LastGoldenCookieState,
   LastSpawnedGoldenCookieState,
 } from '../VariablesAndData';
+import { resetChanceTotal } from './Probability';
 
 /**
  * Auxilirary function that finds all currently spawned shimmers.
@@ -56,6 +57,8 @@ export default function CheckGoldenCookie() {
           'Golden Cookie Spawned',
           'A Golden Cookie has spawned. Click it now!',
         );
+        // Reset the cumulative probability when a GC has spawned
+        resetChanceTotal();
       }
 
       Object.keys(Game.shimmers).forEach((i) => {

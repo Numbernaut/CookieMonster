@@ -1,6 +1,7 @@
 import { notificationsFunctions as nF } from '@cookiemonsterteam/cookiemonsterframework/src/index';
 import { CacheSeasonPopShimmer } from '../../Cache/VariablesAndData'; // eslint-disable-line no-unused-vars
 import { LastSeasonPopupState } from '../VariablesAndData';
+import { resetChanceTotalDeer } from './Probability';
 
 /**
  * This function checks if there is reindeer that has spawned
@@ -28,5 +29,7 @@ export default function CheckSeasonPopup() {
       'Reindeer sighted!',
       'A Reindeer has spawned. Click it now!',
     );
+    // Reset the cumulative probability when a deer is spawned
+    resetChanceTotalDeer();
   }
 }
